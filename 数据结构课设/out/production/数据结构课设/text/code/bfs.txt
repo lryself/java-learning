@@ -1,0 +1,34 @@
+void bfs() {
+    isVisited = new boolean[vers.size()];
+    for(int i = 0 ; i <vers.size();i++) {
+        if(!isVisited[i]) {
+            pt.addFrame(showcode(4,6));
+            bfs(isVisited, i);
+        }
+    }
+}
+void bfs(boolean[] isVisited,int i) {
+    Queue<GraphNode> nodeQueue=new LinkedList<>();
+    isVisited[i]=true;
+    pt.addFrame(vers.get(i));
+    nodeQueue.offer(vers.get(i));
+    while(!nodeQueue.isEmpty()){
+        int w=0,q=0,v=vers.indexOf(nodeQueue.poll());
+        while(vers.get(v).arcs.size()>w)
+        {
+            pt.addFrame(vers.get(v).arcs.get(w));
+            q=nextvex(w,v);
+            if(!isVisited[q])
+            {
+                pt.addFrame(vers.get(q));
+                isVisited[q]=true;
+                nodeQueue.offer(vers.get(nextvex(w,v)));
+            }
+            w++;
+        }
+    }
+}
+int nextvex(int w,int e) {
+    int i= vers.indexOf(vers.get(e).arcs.get(w).v);
+    return i;
+}

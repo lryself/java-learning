@@ -1,0 +1,8 @@
+insert into student values(11,'120181080315','李瑞阳','java',100,'20191102');
+insert into student values(12,'120181080315','李瑞阳','C语言',90,'20191102');
+update student set 成绩 = 成绩*0.8+20.4 where 课程='C语言';
+delete from student where 成绩 <= 50 and 成绩 >= 0;
+delete from student where 成绩 <= 60;
+select 学号,姓名,课程,成绩,考试时间 from student where 课程 = 'java';
+select avg(成绩) as 'Java课程的平均成绩' from student; 
+select count(课程) as '选修Java课程的学生人数' from student where 课程='java'; 

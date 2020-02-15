@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="将编译单元“服务器.服务器端.java”重命名为“服务器.java”&#x0D;&#x0A;－ 原始项目：“服务器”&#x0D;&#x0A;－ 原始元素：“服务器.服务器端.java”&#x0D;&#x0A;－ 重命名的元素：“服务器.服务器.java”" description="重命名编译单元“服务器端.java”" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;服务器{服务器端.java" name="服务器.java" references="false" stamp="1574937426464" version="1.0"/>
+</session>

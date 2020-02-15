@@ -1,0 +1,13 @@
+package ³éÏóÀàÁ·Ï°;
+
+public abstract class shape{
+	final public int PI=3;
+	int longth;
+	protected shape(){}
+	protected shape(int longth)
+	{
+		this.longth=longth;
+	}
+	public abstract int getArea();
+	public abstract int getPerimeter();
+}

@@ -1,0 +1,74 @@
+void kruskal(){
+    int father[];int son[];int n=vers.size();//结点个数int l=arcs.size();//边的数目
+    Edge1 e[]=new Edge1[l];father=new int[n];son=new int[n];
+    for(int i = 0; i < n; ++i){
+        father[i] = i;//将每个顶点初始化为一个集合，父节点指向自己。
+        son[i]=1;//初始化每个父节点的儿子数为1
+    }
+    for(int i=0,k=0;i<matrix.length;i++) {
+        for(int j=0;j<matrix.length;j++) {
+            if (matrix[i][j]>0&&matrix[i][j]!=MAXNUM) {
+                e[k] = new Edge1(i,j,matrix[i][j]);
+                k++;
+            }
+        }
+    }
+    double sum=0;int ltotal=0;boolean flag=false;Arrays.sort(e); //按权值由小到大排序
+    for(int i = 0; i < l; ++i)
+    {
+        if(join(e[i].a, e[i].b,father,son)==true)
+        {
+            ltotal++; //边数加1
+            sum += e[i].weight; //记录权值之和
+            pt.addFrame(vers.get(e[i].a),false);
+            pt.addFrame(vers.get(e[i].b),false);
+            pt.addFrame(findEdge(e[i].a,e[i].b));
+        }
+        if(ltotal == n - 1) //最小生成树条件：边数=顶点数-1
+        {
+            flag = true;
+            break;
+        }
+    }
+}
+int unionsearch(int x ,int[] father){ //查找根结点+路径压缩
+    return (x == father[x]) ? x : unionsearch(father[x],father);
+}
+boolean join(int x, int y,int[] father,int []son){ //合并
+    int root1, root2;
+    root1 = unionsearch(x,father);
+    root2 = unionsearch(y,father);
+    if(root1 == root2){ //为环
+        return false;
+    }
+    else if(son[root1] >= son[root2]){
+        father[root2] = root1;
+        son[root1] += son[root2];
+    }
+    else
+    {
+        father[root1] = root2;
+        son[root2] += son[root1];
+    }
+    return true;
+}
+class Edge1 implements Comparable {
+    int a;  //边的一个顶点，从数字0开始
+    int b;  //边的另一个顶点
+    double weight;  //权重
+
+    Edge1(int a,int b,double weight){
+        this.a=a;
+        this.b=b;
+        this.weight=weight;
+    }
+
+    @Override
+    public int compareTo(Object o){
+        Edge1 m = (Edge1)o;
+        int result=(int)(this.weight - m.weight);
+        if(result>0) return 1;
+        else if(result==0) return 0;
+        else return -1;
+    }
+}

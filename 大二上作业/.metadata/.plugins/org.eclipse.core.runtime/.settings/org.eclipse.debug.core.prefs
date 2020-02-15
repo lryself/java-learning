@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<watchExpressions>\r\n    <expression enabled\="true" text\="jTable.getValueAt(i, 2)"/>\r\n    <expression enabled\="true" text\="vector.get(0)"/>\r\n    <expression enabled\="true" text\="jTable.getValueAt(i, 0).equals(vector.get(0))"/>\r\n</watchExpressions>\r\n

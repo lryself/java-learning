@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#setOnMouseClicked" onMouseDragged="#setOnMouseDragged" onMousePressed="#setOnMousePressed" onMouseReleased="#setOnMouseReleased" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graph.Controller">
+   <center>
+      <Pane maxHeight="700.0" prefHeight="700.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="backgroud" fitHeight="700.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/backgroud.png" />
+               </image>
+            </ImageView>
+            <Group fx:id="graphGroup" />
+         </children>
+      </Pane>
+   </center>
+   <left>
+      <SplitPane dividerPositions="0.5" maxWidth="200.0" orientation="VERTICAL" prefHeight="750.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <RadioButton fx:id="AlGraph" contentDisplay="CENTER" mnemonicParsing="false" onAction="#printAlGraph" selected="true" text="邻接表">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="graphStruct" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="MGraph" mnemonicParsing="false" onAction="#printMgraph" text="邻接矩阵" textAlignment="CENTER" toggleGroup="$graphStruct" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+               </bottom>
+               <center>
+                  <TextArea fx:id="graphSave" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="52.0" minHeight="3.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="111.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1.本程序由李瑞阳编写" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2.如果您想创建一个图，您可以点击创建图或者点击文件读取一个图" wrappingWidth="198.4072265625" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3.在创建图后可以使用教学功能" wrappingWidth="197.4072265625" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4.动画演示时您可以点击菜单栏的动画来控制开始，暂停和分步操作" wrappingWidth="200.4072265625" GridPane.rowIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="5.如果您想将图恢复成初始状态请点击显示全部" wrappingWidth="198.4072265625" GridPane.rowIndex="4" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="6.创建图时右键点击点是删除该点" wrappingWidth="197.4072265625" GridPane.rowIndex="5" />
+               </children>
+            </GridPane>
+        </items>
+      </SplitPane>
+   </left>
+   <top>
+      <MenuBar maxHeight="25.0" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="文件">
+            <items>
+              <MenuItem fx:id="openitem" mnemonicParsing="false" onAction="#openitemAction" text="打开图" />
+                  <MenuItem fx:id="saveitem" mnemonicParsing="false" onAction="#saveitemAction" text="保存图" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="动画">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#playItem" text="继续" />
+                  <MenuItem mnemonicParsing="false" onAction="#pauseItem" text="暂停" />
+                  <MenuItem mnemonicParsing="false" onAction="#anispeedItem" text="速度设置" />
+                  <CheckMenuItem fx:id="isallItem" mnemonicParsing="false" onAction="#palyAllItem" selected="true" text="不停顿" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <GridPane maxHeight="25.0" prefHeight="25.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <CheckBox fx:id="createGraph" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handlecreate" text="创建图" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="df_traver" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handledf_traver" text="深度优先遍历" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="bf_traver" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handlebf_traver" text="广度遍历优先" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="prim" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleprim" text="prim算法" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="kruskal" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handlekruskal" text="kruskal算法" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="initGraph" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleclearGraph" text="显示全部" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="dijkstra" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handledijkstra" text="dijkstra算法" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="floyd" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handlefloyd" text="Floyd算法" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="critical" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handlecritical" text="关键路径" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+         </children>
+      </GridPane>
+   </bottom>
+   <right>
+      <ScrollPane prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <content>
+            <GridPane fx:id="codePane" maxWidth="400.0" minWidth="400.0" prefWidth="400.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="200.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+   </right>
+</BorderPane>

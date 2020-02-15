@@ -1,0 +1,15 @@
+package ³éÏóÀàÁ·Ï°;
+
+public class Circle extends shape{
+	public Circle() {
+		super();
+	};
+	public int getArea()
+	{
+		return longth*2*PI;
+	}
+	public int getPerimeter()
+	{
+		return longth*longth*PI; 
+	}
+}

@@ -1,0 +1,89 @@
+int[] topological() {
+    int []r=new int[vers.size()];//各点入度
+    int []str=new int[vers.size()];
+    int [][]a1=matrix;
+    for(int i=0;i<vers.size();i++) {
+        int k=-1;
+        for(int j=0;j<vers.size();j++) {
+            if(a1[j][i]<MAXNUM) {
+                k++;
+            }
+        }
+        r[i]=k;
+    }
+    Stack<Integer> s=new Stack();
+    for(int i=0;i<vers.size();i++) {
+        if(r[i]==0) {
+            s.push(i);
+        }
+    }
+    int n=0;
+    while(!s.isEmpty()) {
+        int x=s.pop();
+        pt.addFrame(vers.get(x));
+        for(int i=0;i<vers.get(x).arcs.size();i++)
+        {
+            pt.addFrame(vers.get(x).arcs.get(i),Color.WHITE);
+        }
+        str[n++]=x;
+        for(int i=0;i<vers.size();i++)
+            if(matrix[x][i]<MAXNUM&&x!=i)
+            {
+                r[i]--;
+                if(r[i]==0)
+                    s.push(i);
+            }
+    }
+    return str;
+}
+void  criticalPath() {
+    int []topo=topological();
+    int []ve=early(topo);
+    int []vl=late(topo);
+    for(int i=0;i<vers.size();i++) {
+        for(int j=0;j<vers.size();j++) {
+            if(matrix[i][j]!=MAXNUM&&i!=j) {
+                int ee=ve[i];
+                int el=vl[j]-matrix[i][j];
+                if(ee==el) {
+                    pt.addFrame(vers.get(i),false);
+                    pt.addFrame(findEdge(i,j));
+                    pt.addFrame(vers.get(j),false);
+                }
+            }
+        }
+    }
+}
+int [] late(int []s) {
+    int ve[]=early(s);
+    int vl[]=new int[vers.size()];
+    int n=vers.size();
+    for(int i=0;i<vl.length;i++)
+        vl[i]=ve[n-1];
+    for(int i=n-1;i>=0;i--) {
+        int j=s[i];
+        for(int k=0;k<n;k++) {
+            if(matrix[j][k]!=MAXNUM&&j!=k) {
+                if(vl[j]>(vl[k]-matrix[j][k])) {
+                    vl[j]=vl[k]-matrix[j][k];
+                }
+            }
+        }
+    }
+    return vl;
+}
+int[] early(int []s) {
+    int[]ve=new int[vers.size()];
+    for(int i=0;i<vers.size();i++)
+        ve[i]=0;
+    for(int i=0;i<vers.size();i++) {
+        int k=s[i];
+        for(int j=0;j<vers.size();j++) {
+            if(matrix[k][j]!=MAXNUM) {
+                if(ve[j]<ve[k]+matrix[k][j])
+                {ve[j]=ve[k]+matrix[k][j];}
+            }
+        }
+    }
+    return ve;
+}

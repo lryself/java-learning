@@ -1,0 +1,30 @@
+boolean isVisited[];
+void dfs() {
+    initColor();
+    isVisited = new boolean[vers.size()];
+    for(int i = 0 ; i <vers.size();i++) {
+        if(!isVisited[i]) {
+            dfs(isVisited, i);
+        }
+    }
+}
+void dfs(boolean[] isVisited,int i) {
+    isVisited[i]=true;
+    pt.addFrame(vers.get(i));
+    int w=0,q=0;
+    while(vers.get(i).arcs.size()>w)
+    {
+        pt.addFrame(vers.get(i).arcs.get(w));
+        q=nextvexdfs(w,i);
+        pt.addFrame(vers.get(q));
+        if(!isVisited[q])
+        {
+            dfs(isVisited, q);
+        }
+        w++;
+    }
+}
+int nextvex(int w,int e) {
+    int i= vers.indexOf(vers.get(e).arcs.get(w).v);
+    return i;
+}
